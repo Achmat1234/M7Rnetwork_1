@@ -7,6 +7,13 @@ console.log('🔍 API_URL:', API_URL)
 console.log('🔍 Environment:', import.meta.env.MODE)
 console.log('🔍 VITE_API_URL:', import.meta.env.VITE_API_URL)
 
+// Alert for debugging - remove this later
+if (API_URL.includes('localhost')) {
+  alert('⚠️ Still using localhost! Environment variable not working.')
+} else {
+  console.log('✅ Using Railway backend:', API_URL)
+}
+
 // Get auth token from localStorage
 const getAuthHeader = () => {
   const token = localStorage.getItem('token')
