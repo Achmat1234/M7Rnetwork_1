@@ -1,4 +1,9 @@
 require('dotenv').config()
+
+// Environment variable defaults for Railway deployment
+process.env.JWT_SECRET = process.env.JWT_SECRET || 'M7R_fallback_secret_2024_railway'
+process.env.NODE_ENV = process.env.NODE_ENV || 'production'
+
 const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
@@ -53,15 +58,19 @@ app.use(express.json({ limit: '10mb' })) // Limit payload size
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 app.use(morgan('combined')) // More detailed logging
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('MongoDB connected')
-}).catch((err) => {
-  console.error('MongoDB connection error:', err)
-})
+// Connect to MongoDB (optional for in-memory auth)
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }).then(() => {
+    console.log('MongoDB connected')
+  }).catch((err) => {
+    console.error('MongoDB connection error:', err)
+  })
+} else {
+  console.log('⚠️  MongoDB URI not provided - using in-memory storage only')
+}
 
 // Socket.IO setup
 io.on('connection', (socket) => {
