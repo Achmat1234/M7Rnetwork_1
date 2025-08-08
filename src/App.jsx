@@ -11,6 +11,7 @@ import Dashboard from './pages/dashboard/Dashboard'
 import OwnerDashboard from './pages/dashboard/OwnerDashboard'
 import StorePage from './pages/store/StorePage'
 import MaRk7RawStore from './pages/store/MaRk7RawStore'
+import ProductManager from './pages/store/ProductManager'
 import ShoppingCart from './pages/store/ShoppingCart'
 import Wishlist from './pages/store/Wishlist'
 import YocoCheckout from './pages/store/YocoCheckout'
@@ -114,6 +115,12 @@ function App() {
                 <Route path="/product-management" element={
                   <ProtectedRoute ownerOnly>
                     <ProductManagement />
+                  </ProtectedRoute>
+                } />
+
+                <Route path="/store/manage" element={
+                  <ProtectedRoute ownerOnly>
+                    <ProductManager />
                   </ProtectedRoute>
                 } />
 

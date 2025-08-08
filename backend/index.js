@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
 
 // Import and use routes (auth, store, marketplace, chat, etc.)
 const authRoutes = require('./routes/auth-simple')
-const productRoutes = require('./routes/products')
+const productRoutes = require('./routes/products-new')
 const storeRoutes = require('./routes/store')
 const marketplaceRoutes = require('./routes/marketplace')
 const orderRoutes = require('./routes/order')

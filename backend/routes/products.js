@@ -2,7 +2,42 @@ const express = require('express')
 const router = express.Router()
 const auth = require('../middleware/auth')
 const { ownerRequired } = require('../middleware/ownership')
-const Product = require('../models/Product')
+
+// In-memory products storage (for development)
+let products = [
+  {
+    id: 1,
+    name: 'MaRk7Raw Signature Tee',
+    description: 'Premium cotton blend with exclusive M7R design. Comfortable fit with bold graphics.',
+    price: 299,
+    category: 'clothing',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Black', 'White', 'Gray'],
+    images: ['/api/placeholder/400/400'],
+    stock: 50,
+    tags: ['signature', 'premium', 'cotton'],
+    status: 'active',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: 2,
+    name: 'M7R Premium Hoodie',
+    description: 'Ultra-soft fleece hoodie with embroidered logo. Perfect for casual wear.',
+    price: 599,
+    category: 'clothing',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Black', 'Navy', 'Gray'],
+    images: ['/api/placeholder/400/400'],
+    stock: 25,
+    tags: ['hoodie', 'premium', 'fleece'],
+    status: 'active',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+]
+
+let nextId = 3
 
 // @route   GET /api/products
 // @desc    Get all products with filters
@@ -20,34 +55,89 @@ router.get('/', async (req, res) => {
       search
     } = req.query
 
-    // Build filter object
-    const filter = { status: 'active' }
+    let filteredProducts = products.filter(product => product.status === 'active')
     
+    // Apply filters
     if (category && category !== 'all') {
-      filter.category = category
+      filteredProducts = filteredProducts.filter(product => product.category === category)
     }
     
     if (priceMin || priceMax) {
-      filter.price = {}
-      if (priceMin) filter.price.$gte = parseFloat(priceMin)
-      if (priceMax) filter.price.$lte = parseFloat(priceMax)
+      filteredProducts = filteredProducts.filter(product => {
+        const price = product.price
+        if (priceMin && price < parseFloat(priceMin)) return false
+        if (priceMax && price > parseFloat(priceMax)) return false
+        return true
+      })
     }
 
     if (search) {
-      filter.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-        { tags: { $in: [new RegExp(search, 'i')] } }
-      ]
+      const searchLower = search.toLowerCase()
+      filteredProducts = filteredProducts.filter(product =>
+        product.name.toLowerCase().includes(searchLower) ||
+        product.description.toLowerCase().includes(searchLower) ||
+        product.tags.some(tag => tag.toLowerCase().includes(searchLower))
+      )
     }
 
-    // Build sort object
-    const sort = {}
-    if (sortBy === 'price-low') {
-      sort.price = 1
-    } else if (sortBy === 'price-high') {
-      sort.price = -1
-    } else if (sortBy === 'rating') {
+    // Apply sorting
+    filteredProducts.sort((a, b) => {
+      let aValue, bValue
+      
+      switch (sortBy) {
+        case 'price-low':
+        case 'price':
+          aValue = a.price
+          bValue = b.price
+          break
+        case 'price-high':
+          aValue = b.price
+          bValue = a.price
+          break
+        case 'name':
+          aValue = a.name.toLowerCase()
+          bValue = b.name.toLowerCase()
+          break
+        default:
+          aValue = new Date(a.createdAt)
+          bValue = new Date(b.createdAt)
+      }
+      
+      if (sortBy === 'price-high') {
+        return aValue - bValue
+      }
+      
+      if (sortOrder === 'desc') {
+        return aValue > bValue ? -1 : 1
+      } else {
+        return aValue < bValue ? -1 : 1
+      }
+    })
+
+    // Apply pagination
+    const startIndex = (parseInt(page) - 1) * parseInt(limit)
+    const endIndex = startIndex + parseInt(limit)
+    const paginatedProducts = filteredProducts.slice(startIndex, endIndex)
+
+    res.json({
+      success: true,
+      data: paginatedProducts,
+      pagination: {
+        currentPage: parseInt(page),
+        totalPages: Math.ceil(filteredProducts.length / parseInt(limit)),
+        totalProducts: filteredProducts.length,
+        hasNextPage: endIndex < filteredProducts.length,
+        hasPrevPage: startIndex > 0
+      }
+    })
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch products'
+    })
+  }
+})
       sort.rating = -1
     } else if (sortBy === 'popular') {
       sort.sold = -1
