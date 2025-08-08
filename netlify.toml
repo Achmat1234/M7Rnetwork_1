@@ -3,6 +3,7 @@
   publish = "dist"
 
 [build.environment]
+  VITE_API_URL = "https://m7rnetwork1-production.up.railway.app/api"
   SECRETS_SCAN_OMIT_KEYS = "VITE_API_URL"
 
 [context.production]

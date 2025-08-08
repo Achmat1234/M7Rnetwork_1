@@ -1,7 +1,5 @@
 // API service for products
-const API_BASE_URL = import.meta.env.PROD 
-  ? 'https://your-api-domain.com/api' 
-  : 'http://localhost:5001/api'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://m7rnetwork1-production.up.railway.app/api'
 
 class ProductService {
   async getProducts(filters = {}) {
