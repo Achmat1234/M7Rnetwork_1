@@ -43,9 +43,7 @@ app.use(sanitizeInput) // Input sanitization
 
 // Standard Middleware
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? [process.env.FRONTEND_URL, 'https://aesthetic-blini-ca9429.netlify.app', 'https://m7rnetwork1-production.up.railway.app']
-    : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176', 'http://localhost:5177', 'http://localhost:5178'],
+  origin: true, // Allow all origins for now to test
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -79,7 +77,7 @@ app.get('/', (req, res) => {
 })
 
 // Import and use routes (auth, store, marketplace, chat, etc.)
-const authRoutes = require('./routes/auth-new')
+const authRoutes = require('./routes/auth-simple')
 const productRoutes = require('./routes/products')
 const storeRoutes = require('./routes/store')
 const marketplaceRoutes = require('./routes/marketplace')
