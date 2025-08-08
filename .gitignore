@@ -18,6 +18,7 @@ node_modules
 
 # API Keys and Secrets
 backend/.env
+backend/.env.example
 dist
 dist-ssr
 *.local

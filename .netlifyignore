@@ -1,0 +1,7 @@
+# Netlify build ignore file
+# This tells Netlify to ignore backend files during frontend build
+
+backend/
+*.env
+*.env.example
+emergency-owner-restore.js
