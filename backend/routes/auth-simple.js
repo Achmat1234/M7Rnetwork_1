@@ -7,23 +7,11 @@ const router = express.Router()
 // Simple in-memory user store
 const users = new Map()
 
-// Initialize with your owner account
+// Initialize empty user store - users register their own accounts
 const initializeUsers = async () => {
-  // Default owner account
-  const ownerPassword = await bcrypt.hash('admin123', 10)
-  users.set('mark7raw@gmail.com', {
-    id: '1',
-    name: 'Achmat Armien',
-    username: 'MaRk7RaW',
-    email: 'mark7raw@gmail.com',
-    password: ownerPassword,
-    role: 'owner',
-    avatar: '👑'
-  })
-
-  console.log('✅ Owner account ready: mark7raw@gmail.com / admin123')
-  console.log('✅ Registration and login system ready for all users!')
-  console.log('💡 To set custom credentials, register a new account or let me know your preferred email/password')
+  console.log('✅ Registration and login system ready!')
+  console.log('📝 Users can register new accounts and login with their credentials')
+  console.log('� Password changes available from user dashboard')
 }
 
 // Initialize users on startup
@@ -46,18 +34,19 @@ router.post('/register', async (req, res) => {
 
     // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 10)
+    const isFirstUser = users.size === 0
     const newUser = {
       id: String(users.size + 1),
       name,
       username,
       email,
       password: hashedPassword,
-      role: 'user',
-      avatar: '👤'
+      role: isFirstUser ? 'owner' : 'user', // First user becomes owner
+      avatar: isFirstUser ? '👑' : '👤'
     }
     
     users.set(email, newUser)
-    console.log('✅ User registered:', email)
+    console.log('✅ User registered:', email, isFirstUser ? '(Owner)' : '(User)')
 
     // Generate JWT token
     const token = jwt.sign(
@@ -67,6 +56,7 @@ router.post('/register', async (req, res) => {
     )
 
     res.status(201).json({
+      success: true,
       message: 'Registration successful',
       user: { 
         id: newUser.id, 
