@@ -25,11 +25,23 @@ export const authAPI = {
   login: async (email, password) => {
     try {
       console.log('🚀 Attempting login to:', `${API_URL}/auth/login`)
-      const response = await axios.post(`${API_URL}/auth/login`, { email, password })
+      console.log('🚀 Login data:', { email, password })
+      
+      const response = await axios.post(`${API_URL}/auth/login`, { email, password }, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        timeout: 10000 // 10 second timeout
+      })
+      
       console.log('✅ Login response:', response.data)
       return response.data
     } catch (error) {
-      console.error('❌ Login error:', error.response?.data || error.message)
+      console.error('❌ Login error details:')
+      console.error('❌ Status:', error.response?.status)
+      console.error('❌ Status Text:', error.response?.statusText)
+      console.error('❌ Response Data:', error.response?.data)
+      console.error('❌ Error Message:', error.message)
       console.error('❌ Full error:', error)
       throw error
     }
