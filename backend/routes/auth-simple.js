@@ -9,6 +9,7 @@ const users = new Map()
 
 // Initialize with your owner account
 const initializeUsers = async () => {
+  // Owner account with original credentials
   const ownerPassword = await bcrypt.hash('admin123', 10)
   users.set('mark7raw@gmail.com', {
     id: '1',
@@ -19,7 +20,22 @@ const initializeUsers = async () => {
     role: 'owner',
     avatar: '👑'
   })
-  console.log('✅ Owner account ready: mark7raw@gmail.com / admin123')
+
+  // Add alternative owner account with your preferred password
+  const altOwnerPassword = await bcrypt.hash('Tasqeen.54321', 10)
+  users.set('owner@m7r.com', {
+    id: '2',
+    name: 'Owner Account',
+    username: 'Owner',
+    email: 'owner@m7r.com',
+    password: altOwnerPassword,
+    role: 'owner',
+    avatar: '👑'
+  })
+
+  console.log('✅ Owner accounts ready:')
+  console.log('   - mark7raw@gmail.com / admin123')
+  console.log('   - owner@m7r.com / Tasqeen.54321')
   console.log('✅ Registration and login system ready for all users!')
 }
 
@@ -85,9 +101,11 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     console.log('🔐 Login attempt:', req.body.email)
+    console.log('🔐 Available users:', Array.from(users.keys()))
     const { email, password } = req.body
 
     if (!email || !password) {
+      console.log('❌ Missing email or password')
       return res.status(400).json({ message: 'Email and password are required' })
     }
 
@@ -95,8 +113,11 @@ router.post('/login', async (req, res) => {
     const user = users.get(email)
     if (!user) {
       console.log('❌ User not found:', email)
+      console.log('❌ Available emails:', Array.from(users.keys()))
       return res.status(401).json({ message: 'Invalid email or password' })
     }
+
+    console.log('🔍 Found user:', user.email, 'Role:', user.role)
 
     // Check password
     const isValidPassword = await bcrypt.compare(password, user.password)
@@ -114,6 +135,7 @@ router.post('/login', async (req, res) => {
 
     console.log('✅ Login successful:', email)
     res.json({
+      success: true,
       message: 'Login successful',
       user: { 
         id: user.id, 
