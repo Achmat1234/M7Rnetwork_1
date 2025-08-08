@@ -9,7 +9,7 @@ const users = new Map()
 
 // Initialize with your owner account
 const initializeUsers = async () => {
-  // Owner account with original credentials
+  // Default owner account
   const ownerPassword = await bcrypt.hash('admin123', 10)
   users.set('mark7raw@gmail.com', {
     id: '1',
@@ -21,22 +21,9 @@ const initializeUsers = async () => {
     avatar: '👑'
   })
 
-  // Add alternative owner account with your preferred password
-  const altOwnerPassword = await bcrypt.hash('Tasqeen.54321', 10)
-  users.set('owner@m7r.com', {
-    id: '2',
-    name: 'Owner Account',
-    username: 'Owner',
-    email: 'owner@m7r.com',
-    password: altOwnerPassword,
-    role: 'owner',
-    avatar: '👑'
-  })
-
-  console.log('✅ Owner accounts ready:')
-  console.log('   - mark7raw@gmail.com / admin123')
-  console.log('   - owner@m7r.com / Tasqeen.54321')
+  console.log('✅ Owner account ready: mark7raw@gmail.com / admin123')
   console.log('✅ Registration and login system ready for all users!')
+  console.log('💡 To set custom credentials, register a new account or let me know your preferred email/password')
 }
 
 // Initialize users on startup
