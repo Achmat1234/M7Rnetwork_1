@@ -12,6 +12,7 @@ if (API_URL.includes('localhost')) {
   alert('⚠️ Still using localhost! Environment variable not working.')
 } else {
   console.log('✅ Using Railway backend:', API_URL)
+  alert('✅ Using Railway backend: ' + API_URL) // Show in alert too
 }
 
 // Get auth token from localStorage
