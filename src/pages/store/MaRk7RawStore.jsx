@@ -499,7 +499,7 @@ const ProductCard = ({ product, isOwner, viewMode, isInWishlist, onToggleWishlis
       <div className="bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden border border-white/20 group hover:border-blue-500/50 transition-all duration-300">
         <div className="relative">
           <img
-            src={product.images[0] || "/api/placeholder/400/400"}
+            src={product.images[0] || "https://via.placeholder.com/400x400/7c3aed/ffffff?text=M7R+Product"}
             alt={product.name}
             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
           />
@@ -628,7 +628,7 @@ const ProductCard = ({ product, isOwner, viewMode, isInWishlist, onToggleWishlis
     <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 flex gap-6">
       <div className="relative w-48 h-48 flex-shrink-0">
         <img
-          src={product.images[0] || "/api/placeholder/400/400"}
+          src={product.images[0] || "https://via.placeholder.com/400x400/7c3aed/ffffff?text=M7R+Product"}
           alt={product.name}
           className="w-full h-full object-cover rounded-lg"
         />
