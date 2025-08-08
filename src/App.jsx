@@ -25,6 +25,7 @@ import ToolsPage from './pages/tools/ToolsPage'
 import SecurityDashboard from './pages/SecurityDashboard'
 import AIAssistant from './pages/AIAssistant'
 import Analytics from './pages/Analytics'
+import NotFoundPage from './pages/NotFoundPage'
 import OwnerSetup from './components/OwnerSetup'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
@@ -73,6 +74,12 @@ function App() {
                 <Route path="/community" element={
                   <ProtectedRoute>
                     <CommunityPage />
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/profile" element={
+                  <ProtectedRoute>
+                    <ProfilePage />
                   </ProtectedRoute>
                 } />
                 
@@ -128,6 +135,9 @@ function App() {
                 <Route path="/cart" element={<ShoppingCart />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/checkout" element={<YocoCheckout />} />
+                
+                {/* 404 Catch-all Route */}
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </main>
             

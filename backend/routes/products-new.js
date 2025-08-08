@@ -139,6 +139,24 @@ router.get('/', async (req, res) => {
   }
 })
 
+// @route   GET /api/products/manage/all
+// @desc    Get all products for management (including inactive) (Owner only)
+// @access  Private (Owner)
+router.get('/manage/all', auth, ownerRequired, async (req, res) => {
+  try {
+    res.json({
+      success: true,
+      data: products
+    })
+  } catch (error) {
+    console.error('Error fetching products for management:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch products'
+    })
+  }
+})
+
 // @route   GET /api/products/:id
 // @desc    Get single product
 // @access  Public
@@ -308,24 +326,6 @@ router.delete('/:id', auth, ownerRequired, async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to delete product'
-    })
-  }
-})
-
-// @route   GET /api/products/manage/all
-// @desc    Get all products for management (including inactive) (Owner only)
-// @access  Private (Owner)
-router.get('/manage/all', auth, ownerRequired, async (req, res) => {
-  try {
-    res.json({
-      success: true,
-      data: products
-    })
-  } catch (error) {
-    console.error('Error fetching products for management:', error)
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch products'
     })
   }
 })
