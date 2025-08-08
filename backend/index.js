@@ -26,7 +26,7 @@ const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? ['https://yourdomain.com'] // Replace with your actual domain
+      ? [process.env.FRONTEND_URL, 'https://aesthetic-blini-ca9429.netlify.app'] // Replace with your actual Netlify domain
       : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176', 'http://localhost:5177', 'http://localhost:5178'],
     methods: ['GET', 'POST'],
     credentials: true
@@ -44,7 +44,7 @@ app.use(sanitizeInput) // Input sanitization
 // Standard Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://yourdomain.com']
+    ? [process.env.FRONTEND_URL, 'https://aesthetic-blini-ca9429.netlify.app']
     : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176', 'http://localhost:5177', 'http://localhost:5178'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
