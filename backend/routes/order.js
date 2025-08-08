@@ -1,10 +1,11 @@
 const express = require('express')
 const Order = require('../models/Order')
 const auth = require('../middleware/auth')
+const { ownerRequired } = require('../middleware/ownership')
 const router = express.Router()
 
 // Place order
-router.post('/', auth(), async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     const { seller, products, total, paymentMethod, paymentId } = req.body
     const order = await Order.create({
@@ -23,7 +24,7 @@ router.post('/', auth(), async (req, res) => {
 })
 
 // Get my orders
-router.get('/my', auth(), async (req, res) => {
+router.get('/my', auth, async (req, res) => {
   try {
     const orders = await Order.find({ buyer: req.user.id })
       .populate('products.product')
@@ -35,7 +36,7 @@ router.get('/my', auth(), async (req, res) => {
 })
 
 // Seller: Get orders for my products
-router.get('/sales', auth(), async (req, res) => {
+router.get('/sales', auth, async (req, res) => {
   try {
     const orders = await Order.find({ seller: req.user.id })
       .populate('products.product')
@@ -47,7 +48,7 @@ router.get('/sales', auth(), async (req, res) => {
 })
 
 // Admin/Owner: Get all orders
-router.get('/', auth(['admin', 'owner']), async (req, res) => {
+router.get('/', auth, ownerRequired, async (req, res) => {
   try {
     const orders = await Order.find()
       .populate('products.product')
@@ -60,7 +61,7 @@ router.get('/', auth(['admin', 'owner']), async (req, res) => {
 })
 
 // Update order status (admin/owner)
-router.put('/:id', auth(['admin', 'owner']), async (req, res) => {
+router.put('/:id', auth, ownerRequired, async (req, res) => {
   try {
     const updated = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.json(updated)

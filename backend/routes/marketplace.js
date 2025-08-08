@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 
 // User: Add product to marketplace
-router.post('/', auth(), async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     const { name, description, price, images, seo } = req.body
     const product = await Product.create({
@@ -33,7 +33,7 @@ router.post('/', auth(), async (req, res) => {
 })
 
 // User: Remove own product
-router.delete('/:id', auth(), async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
     if (!product) return res.status(404).json({ message: 'Product not found' })
@@ -46,7 +46,7 @@ router.delete('/:id', auth(), async (req, res) => {
 })
 
 // User: Update own product
-router.put('/:id', auth(), async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
     if (!product) return res.status(404).json({ message: 'Product not found' })

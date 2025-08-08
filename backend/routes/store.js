@@ -1,6 +1,7 @@
 const express = require('express')
 const Product = require('../models/Product')
 const auth = require('../middleware/auth')
+const { ownerRequired } = require('../middleware/ownership')
 const router = express.Router()
 
 // Get all store products (MaRk7Raw Fashion)
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
 })
 
 // Owner: Add product to store
-router.post('/', auth('owner'), async (req, res) => {
+router.post('/', auth, ownerRequired, async (req, res) => {
   try {
     const { name, description, price, images, seo } = req.body
     const product = await Product.create({
@@ -33,7 +34,7 @@ router.post('/', auth('owner'), async (req, res) => {
 })
 
 // Owner: Remove product from store
-router.delete('/:id', auth('owner'), async (req, res) => {
+router.delete('/:id', auth, ownerRequired, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id)
     res.json({ message: 'Product removed' })
@@ -43,7 +44,7 @@ router.delete('/:id', auth('owner'), async (req, res) => {
 })
 
 // Owner: Update product (SEO, price, images, etc.)
-router.put('/:id', auth('owner'), async (req, res) => {
+router.put('/:id', auth, ownerRequired, async (req, res) => {
   try {
     const updated = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.json(updated)
