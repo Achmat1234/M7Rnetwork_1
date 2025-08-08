@@ -1,0 +1,16 @@
+{
+  "name": "M7RNetworking",
+  "short_name": "M7R",
+  "description": "Premium networking platform by MaRk7Raw",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1f2937",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
