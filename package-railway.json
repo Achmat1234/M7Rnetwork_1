@@ -1,0 +1,13 @@
+{
+  "name": "m7rnetwork-railway-backend",
+  "version": "1.0.0",
+  "description": "M7RNetworking Backend API for Railway deployment",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "cd backend && node index.js",
+    "build": "cd backend && npm install --production"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
