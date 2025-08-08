@@ -2,6 +2,11 @@ import axios from 'axios'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
 
+// Debug logging
+console.log('🔍 API_URL:', API_URL)
+console.log('🔍 Environment:', import.meta.env.MODE)
+console.log('🔍 VITE_API_URL:', import.meta.env.VITE_API_URL)
+
 // Get auth token from localStorage
 const getAuthHeader = () => {
   const token = localStorage.getItem('token')
@@ -11,8 +16,16 @@ const getAuthHeader = () => {
 export const authAPI = {
   // Login
   login: async (email, password) => {
-    const response = await axios.post(`${API_URL}/auth/login`, { email, password })
-    return response.data
+    try {
+      console.log('🚀 Attempting login to:', `${API_URL}/auth/login`)
+      const response = await axios.post(`${API_URL}/auth/login`, { email, password })
+      console.log('✅ Login response:', response.data)
+      return response.data
+    } catch (error) {
+      console.error('❌ Login error:', error.response?.data || error.message)
+      console.error('❌ Full error:', error)
+      throw error
+    }
   },
 
   // Register
