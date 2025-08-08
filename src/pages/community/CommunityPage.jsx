@@ -17,21 +17,21 @@ const CommunityPage = () => {
       name: 'Fashion Entrepreneurs',
       members: 234,
       description: 'Connect with fashion industry leaders and creators',
-      image: '/api/placeholder/80/80',
+      image: 'https://via.placeholder.com/80x80/7c3aed/ffffff?text=👗',
       isJoined: true
     },
     {
       name: 'Tech Innovators',
       members: 189,
       description: 'Discuss latest tech trends and startup ideas',
-      image: '/api/placeholder/80/80',
+      image: 'https://via.placeholder.com/80x80/2563eb/ffffff?text=💻',
       isJoined: false
     },
     {
       name: 'MaRk7Raw Supporters',
       members: 567,
       description: 'Official fan community for MaRk7Raw brand',
-      image: '/api/placeholder/80/80',
+      image: 'https://via.placeholder.com/80x80/059669/ffffff?text=M7R',
       isJoined: true
     }
   ]
@@ -39,7 +39,7 @@ const CommunityPage = () => {
   const recentPosts = [
     {
       author: 'Sarah Chen',
-      avatar: '/api/placeholder/40/40',
+      avatar: 'https://via.placeholder.com/40x40/dc2626/ffffff?text=SC',
       content: 'Just launched my new sustainable fashion line! Thanks to everyone in this community for the support and feedback. 🌿👗',
       timestamp: '2 hours ago',
       likes: 24,
@@ -48,7 +48,7 @@ const CommunityPage = () => {
     },
     {
       author: 'Mike Rodriguez',
-      avatar: '/api/placeholder/40/40',
+      avatar: 'https://via.placeholder.com/40x40/ea580c/ffffff?text=MR',
       content: 'Looking for a co-founder for my AI startup. Anyone interested in revolutionizing customer service?',
       timestamp: '4 hours ago',
       likes: 18,
@@ -57,7 +57,7 @@ const CommunityPage = () => {
     },
     {
       author: 'Emma Thompson',
-      avatar: '/api/placeholder/40/40',
+      avatar: 'https://via.placeholder.com/40x40/7c2d12/ffffff?text=ET',
       content: 'MaRk7Raw\'s latest collection is absolutely stunning! The attention to detail is incredible. 🔥',
       timestamp: '6 hours ago',
       likes: 45,

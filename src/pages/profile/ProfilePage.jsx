@@ -199,7 +199,7 @@ const ProfilePage = () => {
           title: 'M7RNetworking Platform',
           type: 'Web Application',
           description: 'Full-stack networking platform with AI integration',
-          image: '/api/placeholder/300/200',
+          image: 'https://via.placeholder.com/300x200/7c3aed/ffffff?text=M7R+Platform',
           technologies: ['React', 'Node.js', 'MongoDB', 'AI/ML'],
           link: 'https://m7rnetworking.com'
         },
@@ -207,7 +207,7 @@ const ProfilePage = () => {
           title: 'MaRk7Raw E-commerce',
           type: 'Fashion Store',
           description: 'Premium fashion e-commerce with YOCO payments',
-          image: '/api/placeholder/300/200',
+          image: 'https://via.placeholder.com/300x200/059669/ffffff?text=Fashion+Store',
           technologies: ['React', 'Express', 'Stripe', 'TailwindCSS'],
           link: 'https://mark7raw.store'
         },
@@ -215,7 +215,7 @@ const ProfilePage = () => {
           title: 'AI Content Generator',
           type: 'SaaS Tool',
           description: 'AI-powered content creation for businesses',
-          image: '/api/placeholder/300/200',
+          image: 'https://via.placeholder.com/300x200/2563eb/ffffff?text=AI+Tool',
           technologies: ['Python', 'OpenAI', 'FastAPI', 'Vue.js'],
           link: 'https://aicontent.mark7raw.com'
         }
@@ -226,7 +226,7 @@ const ProfilePage = () => {
           title: 'Add your first project',
           type: 'Project Type',
           description: 'Showcase your work by adding projects to your portfolio',
-          image: '/api/placeholder/300/200',
+          image: 'https://via.placeholder.com/300x200/dc2626/ffffff?text=Add+Project',
           technologies: ['Add', 'Your', 'Skills'],
           link: 'https://example.com'
         }
@@ -240,7 +240,7 @@ const ProfilePage = () => {
         {
           name: 'Sarah Johnson',
           role: 'Startup Founder',
-          avatar: '/api/placeholder/50/50',
+          avatar: 'https://via.placeholder.com/50x50/7c3aed/ffffff?text=SJ',
           rating: 5,
           text: 'Mark\'s mentorship was instrumental in scaling our platform. His insights into AI integration are unmatched.',
           date: '2 weeks ago'
@@ -248,7 +248,7 @@ const ProfilePage = () => {
         {
           name: 'David Chen',
           role: 'Fashion Designer',
-          avatar: '/api/placeholder/50/50',
+          avatar: 'https://via.placeholder.com/50x50/059669/ffffff?text=DC',
           rating: 5,
           text: 'Working with Mark on fashion tech has been incredible. His vision for sustainable fashion is inspiring.',
           date: '1 month ago'
@@ -256,7 +256,7 @@ const ProfilePage = () => {
         {
           name: 'Emma Wilson',
           role: 'Tech Entrepreneur',
-          avatar: '/api/placeholder/50/50',
+          avatar: 'https://via.placeholder.com/50x50/2563eb/ffffff?text=EW',
           rating: 5,
           text: 'Mark\'s platform networking approach revolutionized how we connect with investors and partners.',
           date: '2 months ago'
@@ -267,7 +267,7 @@ const ProfilePage = () => {
         {
           name: 'Welcome to M7RNetworking!',
           role: 'Platform',
-          avatar: '/api/placeholder/50/50',
+          avatar: 'https://via.placeholder.com/50x50/dc2626/ffffff?text=M7R',
           rating: 5,
           text: 'Start building your network and collecting testimonials from your connections.',
           date: 'Just now'
@@ -583,7 +583,7 @@ const ProfilePage = () => {
       title: 'New Project',
       type: 'Web Application',
       description: 'Project description here',
-      image: '/api/placeholder/300/200',
+      image: 'https://via.placeholder.com/300x200/ea580c/ffffff?text=New+Project',
       technologies: ['React', 'Node.js'],
       link: 'https://example.com'
     }

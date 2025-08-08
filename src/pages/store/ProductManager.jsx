@@ -495,7 +495,7 @@ const ProductManager = () => {
                 <div key={product.id} className="border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden">
                   <div className="aspect-w-1 aspect-h-1 w-full">
                     <img
-                      src={product.images[0] || 'https://via.placeholder.com/400x400/7c3aed/ffffff?text=Product'}
+                                            src={product.images[0] || 'https://via.placeholder.com/400x400/7c3aed/ffffff?text=M7R+Product'}
                       alt={product.name}
                       className="w-full h-48 object-cover"
                     />
